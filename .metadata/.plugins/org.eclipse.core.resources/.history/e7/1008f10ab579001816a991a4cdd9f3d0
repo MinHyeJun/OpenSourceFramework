@@ -1,0 +1,39 @@
+package com.ssu.member;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class MemberServlet
+ */
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String midv = request.getParameter("mid");
+		String mpwv = request.getParameter("mpw");
+		
+		Member m = new Member();
+		String mnamev = m.memberLogin(midv, mpwv);
+
+////		RequestDispatcher rd = request.getRequestDispatcher("/result.jsp");
+////		rd.forward(request, response);
+//		request.setAttribute("LVL", list);
+//		request.getRequestDispatcher("/result.jsp").forward(request, response);
+		if(mnamev != null) {
+			response.sendRedirect("/member_main.jsp?username="+mnamev);
+		} else {
+			response.sendRedirect("/member_login.jsp");
+		}
+		
+	}
+
+}

@@ -1,0 +1,51 @@
+package com.ssu.member;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class MemberServlet
+ */
+@WebServlet("/aa/bb/cc.jjang")
+public class MemberServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor. 
+     */
+    public MemberServlet() {
+        // TODO Auto-generated constructor stub
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: get.....").append(request.getContextPath());
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String midv = request.getParameter("mid");
+		String mpwv = request.getParameter("mpw");
+		String genv = request.getParameter("gen");
+		String[] habitv = request.getParameterValues("habit");
+		for(int i=0; i<habitv.length; i++) {
+			System.out.println(habitv[i]);
+		}
+		
+		System.out.println(midv+" " + mpwv + " " + genv);
+		
+		
+//		Member m = new Member();
+//		m.memberInsert(midv, mpwv, "홍씨");
+//		//m.memberUpdate("kong", "hong");
+//		//m.memberDelete("kong");
+//		m.memberList();
+		
+		
+		
+//		response.getWriter().append("Served at: post....." + ).append(request.getContextPath());
+	}
+
+}

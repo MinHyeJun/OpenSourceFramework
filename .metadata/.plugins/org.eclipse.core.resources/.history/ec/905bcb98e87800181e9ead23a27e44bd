@@ -1,0 +1,36 @@
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table width=300 height=100 border=1 cellpadding=0 cellspacing=0>
+	<tr>
+		<td>번호</td>
+		<td>아이디</td>
+		<td>이름</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>kim</td>
+		<td>김씨</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>lee</td>
+		<td>이씨</td>
+	</tr>
+</table>
+
+<a href="http://www.naver.com">네이버클릭~</a>
+<img src="tomcat.png" width=30 height=30><br>
+<font size=10 color=red>안녕</font><br>
+11<br>
+22<br><br>
+33<p>
+44<p><p>
+55
+
+</body>
+</html>

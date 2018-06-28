@@ -1,0 +1,52 @@
+package com.ssu.member;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class MemberServlet
+ */
+@WebServlet("/member")
+public class MemberServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor. 
+     */
+    public MemberServlet() {
+        // TODO Auto-generated constructor stub
+    }
+//
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		response.getWriter().append("Served at: get.....").append(request.getContextPath());
+//	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String midv = request.getParameter("mid");
+		String mpwv = request.getParameter("mpw");
+		String mnamev = request.getParameter("mname");
+	
+		
+		Member m = new Member();
+		m.memberInsert(midv, mpwv, mnamev);
+//		//m.memberUpdate("kong", "hong");
+//		//m.memberDelete("kong");
+//		m.memberList();
+		
+		
+////		RequestDispatcher rd = request.getRequestDispatcher("/result.jsp");
+////		rd.forward(request, response);
+//		request.setAttribute("LVL", list);
+//		request.getRequestDispatcher("/result.jsp").forward(request, response);
+		
+		response.sendRedirect("/user_main.jsp?username="+mnamev);
+	}
+
+}

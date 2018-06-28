@@ -1,0 +1,20 @@
+package com.ssu.member;
+//VO Value Object
+public class MemberVO {
+	private int seq;  //property
+	private String mid;
+	private String mpw;
+	private String mname;
+	private String mgubun;
+	private String regdate;
+	
+	public void setSeq(int sss) {
+		this.seq = sss;
+	}
+	
+	public int getSeq() {
+		return this.seq;
+	}
+	
+	
+}
