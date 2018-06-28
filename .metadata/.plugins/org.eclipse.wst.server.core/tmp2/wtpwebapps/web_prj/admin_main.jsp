@@ -19,7 +19,7 @@ if(!gubun.equals("a")){
 <body>
 어드민페이지<br>
 
-<form action="/logout" method="post">
+<form action="/slogout" method="post">
 <input type="submit" value="로그아웃">
 </form>
 

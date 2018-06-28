@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/login" method="post">
+<form action="/slogin" method="post">
 <table width=300 border=1>
 <tr>
 	<td>아이디</td>

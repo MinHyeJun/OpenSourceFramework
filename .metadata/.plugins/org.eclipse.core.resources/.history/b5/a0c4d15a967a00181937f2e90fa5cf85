@@ -1,0 +1,26 @@
+package com.biz.user;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import oracle.net.aso.e;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ArrayList<e> list = new ArrayList();
+		list.add("111");
+		list.add("2222");
+		System.out.println(list.get(0));
+		
+		HashMap map = new HashMap();
+		map.put("AAA", 1111);
+		map.put("BBB", 2222);
+		
+		System.out.println( map.get("BBB"));
+		
+	}
+
+}

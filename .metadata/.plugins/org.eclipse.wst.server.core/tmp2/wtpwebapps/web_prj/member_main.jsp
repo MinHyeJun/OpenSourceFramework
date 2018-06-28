@@ -12,7 +12,7 @@ String username = request.getParameter("username");
 out.println(username + "님 환영합니다.");
 %>
 <br>
-<form action="/logout" method="post">
+<form action="/slogout" method="post">
 <input type="submit" value="로그아웃">
 </form>
 

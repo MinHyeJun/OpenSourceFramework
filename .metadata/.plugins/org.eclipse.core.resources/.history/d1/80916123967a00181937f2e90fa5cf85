@@ -1,0 +1,18 @@
+package com.biz.user;
+
+import java.util.HashMap;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HashMap map = new HashMap();
+		map.put("AAA", 1111);
+		map.put("BBB", 2222);
+		
+		int res = map.get("BBB");
+		System.out.println(res);
+		
+	}
+
+}
