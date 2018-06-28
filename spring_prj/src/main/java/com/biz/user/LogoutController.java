@@ -12,6 +12,7 @@ public class LogoutController {
 	public String handlerRequest(HttpServletRequest request , HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		session.invalidate();
+		session.setMaxInactiveInterval(0);
 		return "member_login";
 	}
 }

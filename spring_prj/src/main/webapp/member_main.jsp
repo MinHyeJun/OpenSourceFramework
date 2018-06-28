@@ -8,7 +8,7 @@
 </head>
 <body>
 <%
-String username = request.getParameter("username");
+String username = (String)request.getAttribute("username");
 out.println(username + "님 환영합니다.");
 %>
 <br>

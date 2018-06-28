@@ -1,66 +1,54 @@
-﻿package com.biz.user;
+package com.biz.user;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DBManager {
-
-	public static Connection getConnection() {
+	
+	
+	public Connection dbConn() {
 		Connection conn = null;
-		try{
-			Class.forName
-			("oracle.jdbc.driver.OracleDriver");
+		try {
+			
 			String url ="jdbc:oracle:thin:@127.0.0.1:1521:XE";
-			String id="ssu";
-			String pw="0000";
-			conn  =DriverManager.getConnection(url,id,pw);
-			System.out.println("DB 연결 성공!");
-
-		}catch(Exception e){ 
-			e.printStackTrace();
+			conn = DriverManager.getConnection(url, "ssu", "0000");  //connection return
+			
+			if(conn != null)
+				System.out.println("연결성공");
+			else
+				System.out.println("연결실패");
+		} catch (SQLException e) {
+				e.printStackTrace();
 		}
+		
 		return conn;
 	}
 
-
-	public static void close(PreparedStatement pstmt, Connection conn) {
-		try{
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-			System.out.println("close success");
-		}catch(Exception e) {
+	public void dbClose(ResultSet rs, PreparedStatement pstmt, Connection conn) {
+		try {
+			if(rs!=null) rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null) conn.close();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try{
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
 		}
-
+		
 	}
-
-	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
-		try{
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
+	
+	
+	
+	
+	public void dbClose(PreparedStatement pstmt, Connection conn) {
+		try {
+			
+			if(pstmt !=null) pstmt.close();
 			if(conn != null) conn.close();
-			System.out.println("close success");
-		}catch(Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
-			try{
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
 		}
+		
 	}
-
-
 }

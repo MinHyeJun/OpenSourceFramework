@@ -9,3 +9,10 @@
 1530166602144	Delete element
 1530166611693	Delete element
 1530169243759	Delete element
+1530171358225	Rename type 'UserDAO'
+1530171388567	Rename type 'UserVO'
+1530171419620	Delete element
+1530171448016	Delete element
+1530172280274	Rename type 'UserService'
+1530172314321	Rename type 'UserServiceImpl'
+1530177988184	Copy compilation unit
