@@ -85,7 +85,7 @@ public class LoginController extends MultiActionController{
 			} else if(vo.getMgubun().equals("a")) {
 				ArrayList list = memberService.memberList();
 				mav.addObject("LVL", list);
-				mav.setViewName("admin_main");
+				mav.setViewName("index");
 			}
 		} else {
 			mav.setViewName("member_login");
