@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userNameSpace">
+	<resultMap id="map" type="com.biz.user.MemberVO">
+		<result property="seq" column="seq" />
+		<result property="mid" column="mid" />
+		<result property="mpw" column="mpw" />
+		<result property="mname" column="mname" />
+		<result property="mgubun" column="mgubun" />
+	</resultMap>
+
+	<select id="allMember" resultType="com.biz.user.MemberVO">
+		select * from member
+	</select>
+
+	<select id="login" parameterType="com.biz.user.MemberVO" resultType="com.biz.user.MemberVO">
+		select
+		mname, mgubun
+		from member
+		where mid = #{mid}
+		and mpw = #{mpw}
+	</select>
+	
+	
+	<sql id="common_insert">
+		insert into member(seq,mid,mpw)
+		values(member_seq.nextval,
+		#{mid}, #{mpw})
+	</sql>
+	<insert id="meminsert" parameterType="com.biz.user.MemberVO">
+		<include refid="common_insert"></include>
+	</insert>
+
+	<insert id="insertReturn" parameterType="com.biz.user.MemberVO"
+		useGeneratedKeys="true">
+		<selectKey keyProperty="seq" resultType="int" order="AFTER">
+			select
+			max(seq) as seq from member
+		</selectKey>
+		<include refid="common_insert"></include>
+	</insert>
+
+	<update id="memUpdate" parameterType="com.biz.user.MemberVO">
+		update member set mpw=#{mpw}
+		where mid=#{mid}
+	</update>
+
+	<delete id="memDelete" parameterType="com.biz.user.MemberVO">
+		delete from mvcuser where
+		seq=#{seq}
+	</delete>
+
+</mapper>

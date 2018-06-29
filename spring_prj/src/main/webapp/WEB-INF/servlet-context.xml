@@ -54,6 +54,30 @@
 	<bean name = "dao" class = "com.biz.user.MemberDAO">
 	</bean>
 	
+	
+	<!-- Session: connection 유지 -->
+	<!-- name이나 id나 비슷한 역할임 대신 id는 특수기호가 올 수 없음 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+	<property name="dataSource" ref="datasoc"/> 
+	<property name="configLocation" value="classpath:config-mybatis.xml"/> 
+	</bean> 
+
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+	<constructor-arg ref="sqlSessionFactory"/> 
+	</bean> 
+	
+	<!-- datasource --> 
+	<!-- connection pool을 드나드는 중간자 역할 -->
+	<bean id="datasoc" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"> 
+	    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	    <property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE" />
+	    <property name="username" value="ssu" />
+	    <property name="password" value="0000" /> 
+	</bean>
+	
+	
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
