@@ -6,15 +6,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.biz.user.memberService;
+import com.biz.user.MemberService;
 
-@Controller
+@Controller //어노테이션, 일종의 new, static 역할, 메모리에 올라감
 public class LoginController{
-	@RequestMapping( value =" /slogin")
+	@Autowired //spring 3.0에서 어노테이션을 통해 필드로 자동으로 받아짐
+	private MemberService memberService;
+//	public LoginController(MemberServiceImpl svc){
+//		this.memberService = svc;
+//	}
+	
+	//메소드 명이 handlerRequest가 아니어도 해당 주소가 들어오면 바로 아래 메소드가 실행됨
+	@RequestMapping(value = "/slogin")
 	public ModelAndView handlerRequest(HttpServletRequest request, HttpServletResponse response) {
 
 		//1. 사용자 입력정보(id,pw) 추출 코드
@@ -24,7 +32,9 @@ public class LoginController{
 		
 		//2. 사용자 입력 정보 이용 UserVO 객체 조회
 		//setter()로 UserService객체 못 받아올 경우 아래 주석풀고 실행
-		memberService memberService = new memberServiceImpl();
+		//---------------------의존성 주입(DI)---------------------
+		//MemberService memberService = new MemberServiceImpl();
+		//-----------------------------------------------------
 		vo = memberService.memberLogin(vo);
 		
 		//3. DB 연동 로직 구현(USERDAO 객체 사용)

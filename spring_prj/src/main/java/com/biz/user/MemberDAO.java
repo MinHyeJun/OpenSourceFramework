@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.biz.user.DBManager;
 import com.biz.user.MemberVO;
 
+@Repository // 디비 저장소를 드나드는 객체
 public class MemberDAO {
 	
 	public MemberVO memberLogin(MemberVO vo) {
@@ -16,6 +19,7 @@ public class MemberDAO {
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		DBManager db = new DBManager();
+		
 		try {
 			conn=db.dbConn();
 			String sql ="select mname, mgubun from member where mid=? and mpw=?";

@@ -2,7 +2,7 @@
 
 import java.util.ArrayList;
 
-public interface memberService {
+public interface MemberService {
 	public MemberVO memberLogin(MemberVO vo);
 	public ArrayList memberList();
 }

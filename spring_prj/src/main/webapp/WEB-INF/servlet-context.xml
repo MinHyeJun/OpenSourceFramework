@@ -19,6 +19,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- 설정 부분, 공통된 중요 설정만 여기에 명시하고, 이 외의 것은 어노테이션으로 표시 -->
+	<!-- <beans>는 일종의 new, static 역할, 메모리에 올라감 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/" />
 		<beans:property name="suffix" value=".jsp" />

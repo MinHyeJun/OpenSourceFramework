@@ -2,15 +2,24 @@
 
 import java.util.ArrayList;
 
-public class memberServiceImpl implements memberService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service // 서비스 객체
+public class MemberServiceImpl implements MemberService {
+	@Autowired
+	private MemberDAO dao;
+	
+//	public MemberServiceImpl(MemberDAO dao)
+//	{
+//		this.dao = dao;
+//	}
 
 	public MemberVO memberLogin(MemberVO vo){
-		MemberDAO memberDAO = new MemberDAO();	
-		return memberDAO.memberLogin(vo);
+		return dao.memberLogin(vo);
 	}
 	
-	public ArrayList memberList(){
-		MemberDAO memberDAO = new MemberDAO();	
-		return memberDAO.memberList();
+	public ArrayList memberList(){	
+		return dao.memberList();
 	}
 }
