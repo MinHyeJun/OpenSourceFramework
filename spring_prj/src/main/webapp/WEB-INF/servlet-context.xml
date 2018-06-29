@@ -23,20 +23,32 @@
 	<!-- <beans>는 일종의 new, static 역할, 메모리에 올라감 -->
 	<!-- controller에 name 속성으로 주소를 주어 동작하도록 함 -->
 	<bean name = "/slogin" class = "com.biz.user.LoginController">
+	    <!--
 	    <constructor-arg>
 	        <ref bean="svc"></ref>
 	    </constructor-arg>
+	    -->
+	    
+	    <!-- setter에서 'set'을 뺀 property 이름을 name 속성으로 명시함 -->
+	    <property name = "memberService">
+	        <ref bean="svc"></ref>
+	    </property>
 	</bean>
 	
 	<bean name = "svc" class = "com.biz.user.MemberServiceImpl">
+	    <!--
 	    <constructor-arg>
 	        <ref bean="dao"></ref>
 	    </constructor-arg>
+	    -->
+	    <property name = "memberDAO">
+	        <ref bean="dao"></ref>
+	    </property>
 	</bean>
 	
 	<bean name = "dao" class = "com.biz.user.MemberDAO">
 	</bean>
-
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />

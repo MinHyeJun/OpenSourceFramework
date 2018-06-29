@@ -10,9 +10,14 @@ public class MemberServiceImpl implements MemberService {
 	//@Autowired
 	private MemberDAO dao;
 	
-	public MemberServiceImpl(MemberDAO dao)
+//	public MemberServiceImpl(MemberDAO dao)
+//	{
+//		this.dao = dao;
+//	}
+	
+	public void setMemberDAO(MemberDAO dao)
 	{
-		this.dao = dao;
+		this.dao=dao;
 	}
 
 	public MemberVO memberLogin(MemberVO vo){

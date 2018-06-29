@@ -21,8 +21,16 @@ import com.biz.user.MemberService;
 public class LoginController implements Controller{
 	//@Autowired //spring 3.0에서 어노테이션을 통해 필드로 자동으로 받아짐
 	private MemberService memberService;
-	public LoginController(MemberServiceImpl svc){
-		this.memberService = svc;
+	
+	// Controller 클래스를 상속하여 사용할 때 생성자 방식
+//	public LoginController(MemberServiceImpl svc){
+//		this.memberService = svc;
+//	}
+	
+	// Controller 클래스를 상속하여 사용할 때 setter 방식
+	public void setMemberService(MemberService memberService)
+	{
+		this.memberService = memberService;
 	}
 	
 	//@RequestMapping 사용 시, 메소드 명이 handlerRequest가 아니어도 해당 주소가 들어오면 바로 아래 메소드가 실행됨
