@@ -7,23 +7,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+//import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.mvc.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.biz.user.MemberService;
 
-@Controller //어노테이션, 일종의 new, static 역할, 메모리에 올라감
-public class LoginController{
-	@Autowired //spring 3.0에서 어노테이션을 통해 필드로 자동으로 받아짐
+// @Controller //어노테이션, 일종의 new, static 역할, 메모리에 올라감
+// Controller 클래스를 상속하여 일반 클래스로 만든 경우, servelt-context.xml에서 <bean>로 명시하여 메모리에 올림
+// service를 생성자를 통해 받아야 함
+// 설정으로 메모리에 생성된 service 객체를 생성자로 넣어줄 수 있도록 명시해야 함
+public class LoginController implements Controller{
+	//@Autowired //spring 3.0에서 어노테이션을 통해 필드로 자동으로 받아짐
 	private MemberService memberService;
-//	public LoginController(MemberServiceImpl svc){
-//		this.memberService = svc;
-//	}
+	public LoginController(MemberServiceImpl svc){
+		this.memberService = svc;
+	}
 	
-	//메소드 명이 handlerRequest가 아니어도 해당 주소가 들어오면 바로 아래 메소드가 실행됨
-	@RequestMapping(value = "/slogin")
-	public ModelAndView handlerRequest(HttpServletRequest request, HttpServletResponse response) {
+	//@RequestMapping 사용 시, 메소드 명이 handlerRequest가 아니어도 해당 주소가 들어오면 바로 아래 메소드가 실행됨
+	//@RequestMapping(value = "/slogin")
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
 		//1. 사용자 입력정보(id,pw) 추출 코드
 		MemberVO vo = new MemberVO(); 

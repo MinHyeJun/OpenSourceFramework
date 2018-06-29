@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.biz.user.DBManager;
 import com.biz.user.MemberVO;
 
-@Repository // 디비 저장소를 드나드는 객체
+//@Repository // 디비 저장소를 드나드는 객체
 public class MemberDAO {
 	
 	public MemberVO memberLogin(MemberVO vo) {

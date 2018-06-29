@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service // 서비스 객체
+//@Service // 서비스 객체
 public class MemberServiceImpl implements MemberService {
-	@Autowired
+	//@Autowired
 	private MemberDAO dao;
 	
-//	public MemberServiceImpl(MemberDAO dao)
-//	{
-//		this.dao = dao;
-//	}
+	public MemberServiceImpl(MemberDAO dao)
+	{
+		this.dao = dao;
+	}
 
 	public MemberVO memberLogin(MemberVO vo){
 		return dao.memberLogin(vo);
