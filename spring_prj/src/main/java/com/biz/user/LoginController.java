@@ -8,7 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.mvc.Controller;
+//import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +19,10 @@ import com.biz.user.MemberService;
 // Controller 클래스를 상속하여 일반 클래스로 만든 경우, servelt-context.xml에서 <bean>로 명시하여 메모리에 올림
 // service를 생성자를 통해 받아야 함
 // 설정으로 메모리에 생성된 service 객체를 생성자로 넣어줄 수 있도록 명시해야 함
-public class LoginController implements Controller{
+
+// spring은 컨트롤러를 먼저 찾고, 컨트롤러 필드에 명시된 필요한 서비스와 dao 등을 찾아가는 것임
+// 어노테이션을 사용하면 컨트롤러를 찾은 다음 필요에 따라 명시된 어노테이션을 참고하여 필요한 객체들을 찾음(찾기 용이하도록 하는 것)
+public class LoginController extends MultiActionController{
 	//@Autowired //spring 3.0에서 어노테이션을 통해 필드로 자동으로 받아짐
 	private MemberService memberService;
 	
@@ -28,6 +32,8 @@ public class LoginController implements Controller{
 //	}
 	
 	// Controller 클래스를 상속하여 사용할 때 setter 방식
+	// Autowired는 setter를 대신하는 것임
+	// 만약 Autowired를 막아야 하는 상황이라면 setter를 열어둘 것
 	public void setMemberService(MemberService memberService)
 	{
 		this.memberService = memberService;
@@ -35,7 +41,10 @@ public class LoginController implements Controller{
 	
 	//@RequestMapping 사용 시, 메소드 명이 handlerRequest가 아니어도 해당 주소가 들어오면 바로 아래 메소드가 실행됨
 	//@RequestMapping(value = "/slogin")
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	// MultiActionController를 상속받는 경우 해당 주소에서 실행할 메소드를 해당 주소로 이름을 지정하면 됨.
+	public ModelAndView slogin(HttpServletRequest request, HttpServletResponse response)
+			//throws Exception
+	{
 
 		//1. 사용자 입력정보(id,pw) 추출 코드
 		MemberVO vo = new MemberVO(); 
@@ -83,5 +92,13 @@ public class LoginController implements Controller{
 		}
 		
 		return mav;
+	}
+	
+	//@RequestMapping(value = "/slogout")
+	public String slogout(HttpServletRequest request , HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		session.setMaxInactiveInterval(0);
+		return "member_login";
 	}
 }

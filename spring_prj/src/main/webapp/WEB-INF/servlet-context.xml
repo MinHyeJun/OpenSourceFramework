@@ -35,6 +35,11 @@
 	    </property>
 	</bean>
 	
+	<!-- 해당 메소드는 service나 dao 등 객체를 생성하여 사용해야하는 경우가 없기 때문에 따로 property를 조립해줘야할 필요 X -->
+	<!-- MultiActionController의 경우, name에 오는 주소와 해당 주소에서 실행할 메소드의 이름이 동일해야 매핑되어 실행됨 -->
+	<bean name = "/slogout" class = "com.biz.user.LoginController">
+	</bean>
+	
 	<bean name = "svc" class = "com.biz.user.MemberServiceImpl">
 	    <!--
 	    <constructor-arg>
