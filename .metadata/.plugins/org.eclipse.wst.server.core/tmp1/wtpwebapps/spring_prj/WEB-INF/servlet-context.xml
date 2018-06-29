@@ -52,17 +52,21 @@
 	</bean>
 	
 	<bean name = "dao" class = "com.biz.user.MemberDAO">
+	<constructor-arg> <ref bean="sqlSessionTemplate"></ref> </constructor-arg>
 	</bean>
 	
 	
 	<!-- Session: connection 유지 -->
 	<!-- name이나 id나 비슷한 역할임 대신 id는 특수기호가 올 수 없음 -->
+	<!-- 커넥션을 관리하는 공장 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
 	<property name="dataSource" ref="datasoc"/> 
 	<property name="configLocation" value="classpath:config-mybatis.xml"/> 
+	<property name="mapperLocations" value="classpath:*-map.xml"/>
 	</bean> 
 
 	
+	<!-- connection을 spring과 연결, session 관리 -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
 	<constructor-arg ref="sqlSessionFactory"/> 
 	</bean> 

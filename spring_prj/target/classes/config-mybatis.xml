@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-<configuration>	
-	<!-- db.properties -->
+<configuration>
+
 	<!-- 그룹변수가 저장되는 곳 -->
+	<!-- db.properties 
 	<properties resource="db.properties" />
+	-->
 	
-	<!-- TypeAliases -->  
+	<!-- 긴 경로 형태의 타입에 alias 지정 -->
+	<!-- TypeAliases
 	<typeAliases>
 		<typeAlias alias="MemberVO" 
 		type="com.biz.user.MemberVO"  />
 	</typeAliases>
+	 -->
 
-	<!-- DBCP -->
 	<!-- ${...} 표시는 그룹변수임  -->
+	<!-- DBCP 
 	<environments default="development">
 		<environment id="development">
-			<transactionManager type="JDBC" />  <!-- MANAGED -->
+			<transactionManager type="JDBC" /> 
 			<dataSource type="POOLED">
 				<property name="driver" value="${driverClassName}" />
 				<property name="url" value="${url}" />
@@ -25,11 +29,13 @@
 			</dataSource>
 		</environment>
 	</environments>
+	-->
 	
-	<!-- mapper --> 
+	<!-- mapper
 	<mappers>
 		<mapper resource="member-map.xml" />		
 	</mappers>
+	-->
 	
 
 </configuration>

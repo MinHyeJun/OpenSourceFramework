@@ -1,11 +1,14 @@
 ﻿package com.biz.user;
 
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.biz.user.DBManager;
@@ -13,66 +16,21 @@ import com.biz.user.MemberVO;
 
 //@Repository // 디비 저장소를 드나드는 객체
 public class MemberDAO {
+//	@Autowired
+	private SqlSession session;
+	
+	public MemberDAO(SqlSession session)
+	{
+		this.session = session;
+	}
 	
 	public MemberVO memberLogin(MemberVO vo) {
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs = null;
-		DBManager db = new DBManager();
-		
-		try {
-			conn=db.dbConn();
-			String sql ="select mname, mgubun from member where mid=? and mpw=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getMid());
-			pstmt.setString(2, vo.getMpw());
-			rs=pstmt.executeQuery();	
-			while(rs.next()) {
-				vo.setMname(rs.getString("mname"));
-				vo.setMgubun(rs.getString("mgubun"));
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			db.dbClose(rs,pstmt,conn);
-		}
-		return vo;
+		//member-map의 login을 호출
+		return session.selectOne("memberNameSpace.login", vo);
 	}
+	
 	public ArrayList memberList() {
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs = null;
-		DBManager db = new DBManager();
-		ArrayList list = new ArrayList();
-		try {
-			
-			
-		conn=db.dbConn();
-		
-		String sql ="select * from member order by seq";
-		pstmt = conn.prepareStatement(sql);
-		rs=pstmt.executeQuery();
-		
-		int seq=0;
-		String mid="",mpw="",mname="";
-		
-		
-		while(rs.next()) {
-			MemberVO vo = new MemberVO();
-			vo.setSeq(rs.getInt("seq"));
-			vo.setMid(rs.getString("mid"));
-			vo.setMpw(rs.getString("mpw"));
-			vo.setMname(rs.getString("mname"));
-			list.add(vo);
-//			System.out.println(seq+"\t"+mid+"\t"+mpw+"\t"+mname);
-		}
-		
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			db.dbClose(rs,pstmt,conn);
-		}
-		return list;
+		return (ArrayList)session.selectList("memberNameSpace.allMember");
 	}
 	
 	public void memberInsert(MemberVO vo) {

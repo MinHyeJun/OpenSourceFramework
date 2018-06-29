@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="userNameSpace">
+<mapper namespace="memberNameSpace">
 	<resultMap id="map" type="com.biz.user.MemberVO">
 		<result property="seq" column="seq" />
 		<result property="mid" column="mid" />
@@ -11,9 +11,11 @@
 	</resultMap>
 
 	<select id="allMember" resultType="com.biz.user.MemberVO">
-		select * from member
+		select * from member order by seq
 	</select>
 
+	<!-- MemberVO 형의 파라미터를 필요로 함 -->
+	<!-- resultType의 필드 property가 select하는 속성의 이름과 동일하면 자동으로 set해줌 -->
 	<select id="login" parameterType="com.biz.user.MemberVO" resultType="com.biz.user.MemberVO">
 		select
 		mname, mgubun
@@ -22,7 +24,7 @@
 		and mpw = #{mpw}
 	</select>
 	
-	
+	<!-- resultType의 필드 property가 select하는 속성의 이름과 동일하면 자동으로 get해줌 -->
 	<sql id="common_insert">
 		insert into member(seq,mid,mpw)
 		values(member_seq.nextval,
@@ -32,6 +34,7 @@
 		<include refid="common_insert"></include>
 	</insert>
 
+
 	<insert id="insertReturn" parameterType="com.biz.user.MemberVO"
 		useGeneratedKeys="true">
 		<selectKey keyProperty="seq" resultType="int" order="AFTER">
@@ -40,6 +43,7 @@
 		</selectKey>
 		<include refid="common_insert"></include>
 	</insert>
+
 
 	<update id="memUpdate" parameterType="com.biz.user.MemberVO">
 		update member set mpw=#{mpw}
