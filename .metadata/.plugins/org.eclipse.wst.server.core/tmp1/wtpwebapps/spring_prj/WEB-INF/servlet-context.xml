@@ -45,6 +45,12 @@
 	<bean name = "/slogout" class = "com.biz.user.LoginController">
 	</bean>
 	
+	<bean name = "/mlist" class = "com.biz.user.LoginController">
+	    <property name = "memberService">
+	        <ref bean="svc"></ref>
+	    </property>
+	</bean>
+	
 	<bean name = "svc" class = "com.biz.user.MemberServiceImpl">
 	    <!--
 	    <constructor-arg>

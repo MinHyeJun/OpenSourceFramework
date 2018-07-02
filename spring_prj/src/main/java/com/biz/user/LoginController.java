@@ -106,4 +106,13 @@ public class LoginController extends MultiActionController{
 		mav.setViewName("index");
 		return mav;
 	}
+	
+	public ModelAndView mlist(HttpServletRequest request , HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList list = memberService.memberList();
+		mav.addObject("LVL", list);
+		mav.setViewName("tables");
+		return mav;
+	}
 }
