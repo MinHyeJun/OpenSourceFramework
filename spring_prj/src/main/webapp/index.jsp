@@ -71,7 +71,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="login.html">Login Page</a>
+              <a href="/login.jsp">Login Page</a>
             </li>
             <li>
               <a href="register.html">Registration Page</a>
@@ -220,8 +220,22 @@
           </form>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+          
+            <%
+            if(session.getAttribute("SS_NAME")!=null)
+            {
+            %>
+            <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i> Logout</a>
+            <%
+            }else{
+            %>
+           <a href="/login.jsp">
+            <i class="fa fa-fw fa-sign-out"></i> Login</a>
+            <%
+            }
+            %>
+           
         </li>
       </ul>
     </div>
@@ -619,6 +633,8 @@
               </tfoot>
               <tbody>
               <%
+              if(session.getAttribute("SS_NAME")!= null)
+              {
 ArrayList list = (ArrayList)request.getAttribute("LVL");
 out.print(list.size() +"명 회원<br>");
 MemberVO vo = new MemberVO();
@@ -634,7 +650,8 @@ for(int i=0; i<list.size(); i++) {
                   <td>$320,800</td>
                 </tr>
  <%
- }
+ } //end of for
+              }// end of if
  %>                 
               </tbody>
             </table>
@@ -669,7 +686,7 @@ for(int i=0; i<list.size(); i++) {
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="/slogout">Logout</a>
           </div>
         </div>
       </div>

@@ -95,10 +95,15 @@ public class LoginController extends MultiActionController{
 	}
 	
 	//@RequestMapping(value = "/slogout")
-	public String slogout(HttpServletRequest request , HttpServletResponse response) {
+	public ModelAndView slogout(HttpServletRequest request , HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		session.setMaxInactiveInterval(0);
-		return "member_login";
+		ModelAndView mav = new ModelAndView();
+		
+//		ArrayList list = memberService.memberList();
+//		mav.addObject("LVL", list);
+		mav.setViewName("index");
+		return mav;
 	}
 }
