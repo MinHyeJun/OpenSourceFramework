@@ -51,6 +51,9 @@
 	    </property>
 	</bean>
 	
+	<bean name = "/crow" class = "com.biz.user.LoginController">
+	</bean>
+	
 	<bean name = "svc" class = "com.biz.user.MemberServiceImpl">
 	    <!--
 	    <constructor-arg>

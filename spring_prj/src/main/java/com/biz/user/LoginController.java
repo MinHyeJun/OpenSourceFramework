@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;
 //import org.springframework.web.servlet.mvc.Controller;
@@ -113,6 +117,21 @@ public class LoginController extends MultiActionController{
 		ArrayList list = memberService.memberList();
 		mav.addObject("LVL", list);
 		mav.setViewName("tables");
+		return mav;
+	}
+	
+	public ModelAndView crow(HttpServletRequest request, HttpServletResponse response)
+	throws Exception{
+		ModelAndView mav = new ModelAndView();
+
+		Document url = Jsoup.connect("https://search.shopping.naver.com/search/category.nhn?cat_id=50001228").get();
+		Elements tagVal = url.select("ul.goods_list");
+		//String text = tagVal.select("a").html();
+		System.out.println("tagVal : " + tagVal);
+		//System.out.println("text : " + text);
+
+		mav.addObject("DATA", tagVal);
+		mav.setViewName("charts");
 		return mav;
 	}
 }
